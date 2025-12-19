@@ -36,21 +36,18 @@ func pressed(node,card_self):
 		pass 
 	else:
 		pass
-		#%back.disabled = false
-		#group_stack.append(get_children())
-		#for i:Control in get_children():
-			#i.visible = false
-			#i.reparent(card_storage)
-		#display(card_self.get_meta("group"))
+		%back.disabled = false
+		group_stack.append(get_children())
+		for i:Control in get_children():
+			i.visible = false
+			i.reparent(card_storage)
+		display(card_self.get_meta("group"))
 	pass
 
 
 func _on_back_pressed() -> void:
 	print_orphan_nodes()
 	var prev = group_stack.pop_back()
-	for k in get_children():
-		k.queue_free()
-		pass
 	for i in get_children():
 		i.queue_free()
 		pass
