@@ -1,0 +1,7 @@
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://ctbhvj40f22c2"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pq8q7"]
+bg_color = Color(0.6, 0, 0, 1)
+
+[resource]
+PopupMenu/styles/panel = SubResource("StyleBoxFlat_pq8q7")

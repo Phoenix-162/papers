@@ -1,0 +1,99 @@
+[gd_scene load_steps=3 format=3 uid="uid://osuvewtjun4d"]
+
+[ext_resource type="Script" uid="uid://umrhmy5l71dd" path="res://script/cores/component/node_picker.gd" id="1_bc2ho"]
+[ext_resource type="Script" uid="uid://bjjbv4ip3b241" path="res://script/cores/component/selector.gd" id="2_agi4b"]
+
+[node name="NodePicker" type="Window"]
+oversampling_override = 1.0
+position = Vector2i(0, 36)
+size = Vector2i(880, 575)
+minimize_disabled = true
+maximize_disabled = true
+script = ExtResource("1_bc2ho")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="wraper" type="VBoxContainer" parent="Panel/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 2
+
+[node name="wraper" type="HBoxContainer" parent="Panel/MarginContainer/wraper"]
+layout_mode = 2
+
+[node name="back" type="Button" parent="Panel/MarginContainer/wraper/wraper"]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "back"
+disabled = true
+text = " ^ "
+flat = true
+
+[node name="serchbar" type="LineEdit" parent="Panel/MarginContainer/wraper/wraper"]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "serach node here"
+emoji_menu_enabled = false
+clear_button_enabled = true
+
+[node name="scroll" type="ScrollContainer" parent="Panel/MarginContainer/wraper"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="selector" type="GridContainer" parent="Panel/MarginContainer/wraper/scroll"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 6
+script = ExtResource("2_agi4b")
+
+[node name="PanelContainer" type="PanelContainer" parent="Panel/MarginContainer/wraper"]
+layout_mode = 2
+
+[node name="scroll2" type="ScrollContainer" parent="Panel/MarginContainer/wraper/PanelContainer"]
+custom_minimum_size = Vector2(0, 183.455)
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Panel/MarginContainer/wraper/PanelContainer/scroll2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MarginContainer/wraper"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="ok" type="Button" parent="Panel/MarginContainer/wraper/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+disabled = true
+text = "select"
+
+[node name="cancel" type="Button" parent="Panel/MarginContainer/wraper/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "cancel
+"
+
+[connection signal="selected" from="Panel/MarginContainer/wraper/scroll/selector" to="." method="_on_selector_selected"]

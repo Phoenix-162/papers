@@ -1,0 +1,78 @@
+[gd_scene load_steps=10 format=3 uid="uid://dv8bthwi7u61o"]
+
+[ext_resource type="Script" uid="uid://mi501nphm3nl" path="res://script/cores/component/camera orbit.gd" id="1_q5jj7"]
+[ext_resource type="Script" uid="uid://gugmang06jmv" path="res://script/cores/body.gd" id="1_xjr1o"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_itxqv"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+bg_color = Color(0.1, 0.1, 0.1, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v0l8b"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+bg_color = Color(0.32, 0.32, 0.32, 1)
+border_color = Color(0, 0, 0, 0.77254903)
+
+[sub_resource type="Environment" id="Environment_itxqv"]
+
+[sub_resource type="World3D" id="World3D_brvut"]
+environment = SubResource("Environment_itxqv")
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_itxqv"]
+
+[sub_resource type="Sky" id="Sky_v0l8b"]
+sky_material = SubResource("ProceduralSkyMaterial_itxqv")
+
+[sub_resource type="Environment" id="Environment_v0l8b"]
+background_mode = 2
+sky = SubResource("Sky_v0l8b")
+
+[node name="body" type="PanelContainer"]
+custom_minimum_size = Vector2(200, 200)
+offset_right = 851.0
+offset_bottom = 490.0
+size_flags_vertical = 3
+script = ExtResource("1_xjr1o")
+
+[node name="TabContainer" type="TabContainer" parent="."]
+layout_mode = 2
+theme_override_constants/side_margin = 0
+theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_itxqv")
+theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_itxqv")
+theme_override_styles/tab_selected = SubResource("StyleBoxFlat_v0l8b")
+current_tab = 1
+drag_to_rearrange_enabled = true
+
+[node name="viewport" type="SubViewportContainer" parent="TabContainer"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+stretch = true
+mouse_target = true
+metadata/_tab_index = 0
+
+[node name="world" type="SubViewport" parent="TabContainer/viewport"]
+world_3d = SubResource("World3D_brvut")
+handle_input_locally = false
+size = Vector2i(851, 459)
+render_target_update_mode = 0
+
+[node name="origin" type="Node3D" parent="TabContainer/viewport/world"]
+script = ExtResource("1_q5jj7")
+
+[node name="Camera3D" type="Camera3D" parent="TabContainer/viewport/world/origin"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.578)
+environment = SubResource("Environment_v0l8b")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="TabContainer/viewport/world"]
+
+[node name="edittor" type="PanelContainer" parent="TabContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+metadata/_tab_index = 1
+
+[node name="GraphEdit" type="GraphEdit" parent="TabContainer/edittor"]
+layout_mode = 2
+minimap_enabled = false
+show_minimap_button = false
