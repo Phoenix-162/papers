@@ -2,24 +2,23 @@ extends Window
 
 var nodes:Dictionary = {
 	name = "root",
-	child = {
-		"tes" = "res://script/nodes/node.gd",
-		"tes2" = "res://script/nodes/node.gd",
-		"tes3" ={
-		name = "root1",
-		child = {
-			"tes2t" = "res://script/nodes/node.gd",
-			"tes2" = "res://script/nodes/node.gd"},
-			"tes3" ={
-				name = "root1",
-				child = {
-				"tes" = "res://script/nodes/node.gd",
-				"tes3" = "res://script/nodes/node.gd",
+	child = [
+		"res://script/nodes/node.gd",
+		{
+			name = "root",
+			child = [
+			"res://script/nodes/node.gd",
+			"res://script/nodes/node.gd",
+			{
+				name = "tess",
+				child = [
+					"res://script/nodes/node.gd",
+				]
 			}
-		},
-	},
-	
-}}
+			]
+		}
+	]
+}
 func pick(graph:GraphEdit)-> void:
 	%cancel.pressed.connect(func (): hide())
 	%selector.display(nodes)
