@@ -1,7 +1,6 @@
 #headers for a node
 extends PaperGraphNode
 func init ():
-	category
 	title = "testnode"
 	displayName = "tess"
 	size = Vector2(400,200)

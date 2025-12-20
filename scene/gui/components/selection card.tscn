@@ -53,4 +53,4 @@ scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="pressed" from="margin/wraper/Button" to="." method="_on_button_pressed"]
+[connection signal="button_down" from="margin/wraper/Button" to="." method="_on_button_button_down"]

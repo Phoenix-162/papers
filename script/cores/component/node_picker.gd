@@ -44,4 +44,5 @@ func node_selected(tree:Tree):
 
 
 func _on_selector_selected(card: Control) -> void:
+	print(card)
 	pass # Replace with function body.

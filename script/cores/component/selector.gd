@@ -20,6 +20,7 @@ func display(nodes:Dictionary):
 		var node = nodes.child[id]
 		var new_card = card.instantiate()
 		new_card.pressed.connect(pressed.bind(new_card))
+		
 		if node is Dictionary:
 			add_child(new_card)
 			new_card.set_text(nodes.child[id].name)
@@ -33,23 +34,32 @@ func display(nodes:Dictionary):
 			node_meta.visible = false
 			node_meta.init()
 			new_card.set_text(node_meta.displayName)
-			node_storage.add_child(node_meta)
 			add_child(new_card)
 	pass
 
 
 func pressed(card_self:Control):
 	#todo implemet the grup open featue prevues one got memeory leak
-	var node = card_self.get_node("node")
+	var node = card_self.get_node_or_null("node")
 	if not node == null:
-		print(node.displayName)
+		emit_signal("selected",card_self)
 		pass 
 	else:
+		%back.disabled = false
+		group_stack.append(get_children())
+		for i:Control in get_children():
+			i.hide()
+		display(card_self.get_meta("child"))
 		pass
 	pass
 
 
 func _on_back_pressed() -> void:
 	for i:Control in get_children():
-		i.queue_free()
+		if group_stack.size() == 1:
+			%back.disabled = true
+		if i.visible:
+			i.queue_free()
+	for i:Control in group_stack.pop_back():
+		i.show()
 	pass # Replace with function body.
