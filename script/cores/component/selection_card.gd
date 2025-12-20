@@ -1,11 +1,8 @@
 extends PanelContainer
-signal pressed(node)
+signal pressed()
 
 func _on_button_pressed() -> void:
-	if not has_meta("node") :
-		emit_signal("pressed",null)
-		return
-	emit_signal("pressed",get_meta("node"))
+	emit_signal("pressed")
 	pass # Replace with function body.
 
 
