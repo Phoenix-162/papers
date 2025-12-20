@@ -7,6 +7,9 @@ func _on_button_pressed() -> void:
 		return
 	emit_signal("pressed",get_meta("node"))
 	pass # Replace with function body.
+
+
+
 func set_text (text:String):
 	$margin/wraper/Label.text = text
 func set_icon(img:Texture):
