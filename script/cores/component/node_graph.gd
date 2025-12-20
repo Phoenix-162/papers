@@ -3,7 +3,6 @@ extends GraphNode
 class_name PaperGraphNode
 var displayName = ""
 var descripton = ""
-var category = ""
 var id = ""
 var node:GraphNode
 
