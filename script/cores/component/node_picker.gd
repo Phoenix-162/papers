@@ -14,15 +14,16 @@ var nodes:Dictionary = {
 	}
 }
 func pick(graph:GraphEdit)-> void:
+	%selector.selected.connect(node_selected.bind(graph))
 	%cancel.pressed.connect(func (): hide())
 	%selector.display(nodes)
 	pass
 
 
-
-
-func node_created(tree:Tree,graph:GraphEdit):
-	var node:GraphNode = tree.get_selected().get_meta("node").duplicate(Node.DuplicateFlags.DUPLICATE_SCRIPTS)
+func node_created(card:Control,graph:GraphEdit):
+	var node:GraphNode =card.get_node_or_null("node")
+	if node == null:
+		return
 	node.position_offset = (graph.scroll_offset + graph.size / 2) / graph.zoom - node.size / 2;
 	graph.add_child(node)
 	if node.has_method("create"):
@@ -30,19 +31,7 @@ func node_created(tree:Tree,graph:GraphEdit):
 	hide()
 	pass
 
-func node_selected(tree:Tree):
-	if tree.get_selected() == null:
-		%ok.disabled = true
-		return
-	if tree.get_selected().get_meta("node") == null:
-		%ok.disabled = true
-		return
-	%ok.disabled = false
-	var description:RichTextLabel = get_node("Panel/MarginContainer/wraper/PanelContainer/scroll2/RichTextLabel")
-	description.text = tree.get_selected().get_meta("node").descripton
-	pass
 
-
-func _on_selector_selected(card: Control) -> void:
+func node_selected(card: Control,graph:GraphEdit) -> void:
 	print(card)
 	pass # Replace with function body.
