@@ -1,5 +1,6 @@
 extends GridContainer
 signal selected(card:Control)
+signal folder_opened(card:Control,child:Dictionary)
 var group_stack:Array 
 var card = preload("res://scene/gui/components/selection card.tscn")
 var card_storage:Node = Node.new()
@@ -20,7 +21,6 @@ func display(nodes:Dictionary):
 		var node = nodes.child[id]
 		var new_card = card.instantiate()
 		new_card.pressed.connect(pressed.bind(new_card))
-		
 		if node is Dictionary:
 			add_child(new_card)
 			new_card.set_text(nodes.child[id].name)
@@ -40,15 +40,20 @@ func display(nodes:Dictionary):
 
 func pressed(card_self:Control):
 	#todo implemet the grup open featue prevues one got memeory leak
+	var arr:Array = []
 	var node = card_self.get_node_or_null("node")
 	if not node == null:
 		emit_signal("selected",card_self)
 		pass 
 	else:
 		%back.disabled = false
-		group_stack.append(get_children())
+		
 		for i:Control in get_children():
+			if i.visible:
+				arr.append(i)
 			i.hide()
+		group_stack.append(arr)
+		emit_signal("folder_opened",card_self,card_self.get_meta("child"))
 		display(card_self.get_meta("child"))
 		pass
 	pass

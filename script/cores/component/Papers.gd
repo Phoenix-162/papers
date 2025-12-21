@@ -6,6 +6,10 @@ class storage :
 	static func _static_init() -> void:
 		node.name = "storage"
 
+class dockingManager:
+	pass
+
+
 
 
 func _init() -> void:

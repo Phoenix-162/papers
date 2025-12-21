@@ -10,4 +10,5 @@ func create():
 	btn.text = "crash"
 	add_child(btn)
 	btn.pressed.connect(func (): 
-		OS.crash("err"))
+		OS.alert("tess")
+		)

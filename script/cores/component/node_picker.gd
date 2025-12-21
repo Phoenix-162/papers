@@ -9,10 +9,22 @@ var nodes:Dictionary = {
 			child = {
 				"q" = "res://script/nodes/node.gd",
 				"qq" = "res://script/nodes/node.gd",
+				"e" = {
+					name = "a",
+					child = {
+						"q" = "res://script/nodes/node.gd",
+						"qq" = "res://script/nodes/node.gd",
+					}
+				}
 			}
 		}
 	}
 }
+
+func start(graph:GraphEdit):
+	pass
+
+
 func pick(graph:GraphEdit)-> void:
 	%selector.selected.connect(node_selected.bind(graph))
 	%cancel.pressed.connect(func (): hide())
@@ -20,10 +32,9 @@ func pick(graph:GraphEdit)-> void:
 	pass
 
 
-func node_created(card:Control,graph:GraphEdit):
-	var node:GraphNode =card.get_node_or_null("node")
-	if node == null:
-		return
+func create_node(card:Control,graph:GraphEdit):
+	var node:GraphNode = card.get_node_or_null("node").duplicate(DuplicateFlags.DUPLICATE_SCRIPTS)
+	node.visible = true
 	node.position_offset = (graph.scroll_offset + graph.size / 2) / graph.zoom - node.size / 2;
 	graph.add_child(node)
 	if node.has_method("create"):
@@ -33,5 +44,10 @@ func node_created(card:Control,graph:GraphEdit):
 
 
 func node_selected(card: Control,graph:GraphEdit) -> void:
-	print(card)
+	%ok.pressed.connect(create_node.bind(card,graph))
+	%ok.disabled = false
+	pass # Replace with function body.
+
+
+func _on__folder_opened(card: Control, child: Dictionary) -> void:
 	pass # Replace with function body.

@@ -2,8 +2,12 @@ extends Node
 var selector:Window = preload("res://scene/gui/node picker.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN)
 
 
+
+
+
 func _ready() -> void:
 	var button: Button = Button.new()
+	selector.start($TabContainer/edittor/GraphEdit)
 	var menu : Control = $TabContainer/edittor/GraphEdit.get_menu_hbox()
 	menu.add_child(button)
 	button.text = "add node"
