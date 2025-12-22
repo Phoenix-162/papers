@@ -8,20 +8,17 @@ var nodes:Dictionary = {
 			name = "w",
 			child = {
 				"q" = "res://script/nodes/node.gd",
-				"qq" = "res://script/nodes/node.gd",
-				"e" = {
-					name = "a",
-					child = {
-						"q" = "res://script/nodes/node.gd",
-						"qq" = "res://script/nodes/node.gd",
-					}
-				}
 			}
 		}
 	}
 }
 
+@warning_ignore("unused_parameter")
 func start(graph:GraphEdit):
+	papers.EventHooks.create_singular("tess",func (tes:String): 
+		OS.alert(tes)
+		return tes
+		)
 	pass
 
 
@@ -49,5 +46,6 @@ func node_selected(card: Control,graph:GraphEdit) -> void:
 	pass # Replace with function body.
 
 
+@warning_ignore("unused_parameter")
 func _on__folder_opened(card: Control, child: Dictionary) -> void:
 	pass # Replace with function body.
