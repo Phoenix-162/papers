@@ -6,9 +6,11 @@ func init ():
 	size = Vector2(400,200)
 	descripton = "tes 123"
 func create():
+	
 	var btn:Button = Button.new()
-	btn.text = "crash"
-	add_child(btn)
+	btn.text = "tes"
 	btn.pressed.connect(func (): 
-		OS.alert("tess")
+		papers.EventHooks.trigger_singular("tess","tesaaa")
+		print(papers.EventHooks.return_values)
 		)
+	add_child(btn)
