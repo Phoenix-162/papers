@@ -7,9 +7,9 @@ var card_storage:Node = Node.new()
 var node_storage:Node = Node.new()
 
 func _init() -> void:
-	papers.storage.node.add_child(card_storage)
+	papers.Storage.node.add_child(card_storage)
 	card_storage.name = "cards"
-	papers.storage.node.add_child(node_storage)
+	papers.Storage.node.add_child(node_storage)
 	node_storage.name = "nodes"
 
 

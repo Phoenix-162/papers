@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://dv8bthwi7u61o"]
+[gd_scene load_steps=11 format=3 uid="uid://dv8bthwi7u61o"]
 
 [ext_resource type="Script" uid="uid://mi501nphm3nl" path="res://script/cores/component/camera orbit.gd" id="1_q5jj7"]
 [ext_resource type="Script" uid="uid://gugmang06jmv" path="res://script/cores/body.gd" id="1_xjr1o"]
+[ext_resource type="Script" uid="uid://dyb4itopjhi5w" path="res://script/cores/component/graph.gd" id="3_nkjlt"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_itxqv"]
 content_margin_left = 5.0
@@ -76,3 +77,4 @@ metadata/_tab_index = 1
 layout_mode = 2
 minimap_enabled = false
 show_minimap_button = false
+script = ExtResource("3_nkjlt")

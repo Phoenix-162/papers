@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-papers="*res://script/cores/component/Papers.gd"
+papers="*res://script/cores/Papers.gd"
 
 [display]
 
