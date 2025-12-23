@@ -2,9 +2,6 @@ extends Node
 var selector:Window = preload("res://scene/gui/node picker.tscn").instantiate(PackedScene.GEN_EDIT_STATE_MAIN)
 
 
-
-
-
 func _ready() -> void:
 	var button: Button = Button.new()
 	selector.start($TabContainer/edittor/GraphEdit)
@@ -15,6 +12,11 @@ func _ready() -> void:
 	button.pressed.connect(func ():
 		select_node()
 	)
+
+
+
+
+
 
 
 func select_node ():
@@ -32,3 +34,8 @@ func select_node ():
 		selector.hide()
 		)
 	pass
+
+
+func _on_tab_bar_clicked(tab: int) -> void:
+	$TabContainer.current_tab = tab
+	pass # Replace with function body.

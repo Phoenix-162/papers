@@ -15,10 +15,9 @@ var nodes:Dictionary = {
 
 @warning_ignore("unused_parameter")
 func start(graph:GraphEdit):
-	papers.EventHooks.create_singular("tess",func (tes:String): 
-		OS.alert(tes)
-		return tes
-		)
+	papers.EventHooks.create_grouped("tes",[
+		func (): OS.alert('1'),
+		func () : OS.alert("2")])
 	pass
 
 

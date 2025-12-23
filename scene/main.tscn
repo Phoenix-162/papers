@@ -69,17 +69,27 @@ theme_type_variation = &"FlatMenuButton"
 text = "plugins
 "
 
-[node name="HSplitContainer" type="HSplitContainer" parent="."]
+[node name="HSplitContainer2" type="HSplitContainer" parent="."]
 layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HSplitContainer" type="HSplitContainer" parent="HSplitContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/separation = 1
 
-[node name="body" parent="HSplitContainer" instance=ExtResource("2_v0l8b")]
-custom_minimum_size = Vector2(500, 200)
+[node name="left dock" type="PanelContainer" parent="HSplitContainer2/HSplitContainer"]
+visible = false
+layout_mode = 2
+
+[node name="body" parent="HSplitContainer2/HSplitContainer" instance=ExtResource("2_v0l8b")]
+custom_minimum_size = Vector2(600, 200)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="HSplitContainer/body"]
+[node name="MarginContainer" type="MarginContainer" parent="HSplitContainer2/HSplitContainer/body"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
@@ -88,7 +98,7 @@ theme_override_constants/margin_left = 0
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="Button" type="Button" parent="HSplitContainer/body/MarginContainer"]
+[node name="Button" type="Button" parent="HSplitContainer2/HSplitContainer/body/MarginContainer"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -96,10 +106,10 @@ size_flags_vertical = 8
 theme_override_styles/normal = SubResource("StyleBoxFlat_wp4xf")
 theme_override_styles/hover = SubResource("StyleBoxFlat_brvut")
 
-[node name="right dock" type="PanelContainer" parent="HSplitContainer"]
+[node name="right dock" type="PanelContainer" parent="HSplitContainer2"]
 unique_name_in_owner = true
 visible = false
-custom_minimum_size = Vector2(300, 0)
 layout_mode = 2
+size_flags_horizontal = 0
 
-[connection signal="pressed" from="HSplitContainer/body/MarginContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="HSplitContainer2/HSplitContainer/body/MarginContainer/Button" to="." method="_on_button_pressed"]
