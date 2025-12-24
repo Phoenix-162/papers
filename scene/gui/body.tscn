@@ -29,20 +29,33 @@ sky_material = SubResource("ProceduralSkyMaterial_itxqv")
 background_mode = 2
 sky = SubResource("Sky_v0l8b")
 
-[node name="body" type="PanelContainer"]
+[node name="body" type="VBoxContainer"]
 custom_minimum_size = Vector2(200, 200)
-offset_right = 851.0
-offset_bottom = 490.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 3
+theme_override_constants/separation = 0
 script = ExtResource("1_xjr1o")
+
+[node name="TabBar" type="TabBar" parent="."]
+layout_mode = 2
+current_tab = 1
+tab_count = 2
+tab_0/title = "veivport"
+tab_1/title = "editor"
 
 [node name="TabContainer" type="TabContainer" parent="."]
 layout_mode = 2
+size_flags_vertical = 3
 theme_override_constants/side_margin = 0
 theme_override_styles/tab_unselected = SubResource("StyleBoxFlat_itxqv")
 theme_override_styles/tab_hovered = SubResource("StyleBoxFlat_itxqv")
 theme_override_styles/tab_selected = SubResource("StyleBoxFlat_v0l8b")
 current_tab = 1
+tabs_visible = false
 drag_to_rearrange_enabled = true
 
 [node name="viewport" type="SubViewportContainer" parent="TabContainer"]
@@ -65,6 +78,7 @@ script = ExtResource("1_q5jj7")
 [node name="Camera3D" type="Camera3D" parent="TabContainer/viewport/world/origin"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4.578)
 environment = SubResource("Environment_v0l8b")
+current = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="TabContainer/viewport/world"]
 
@@ -78,3 +92,5 @@ layout_mode = 2
 minimap_enabled = false
 show_minimap_button = false
 script = ExtResource("3_nkjlt")
+
+[connection signal="tab_clicked" from="TabBar" to="." method="_on_tab_bar_clicked"]

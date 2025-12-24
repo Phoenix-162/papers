@@ -8,9 +8,6 @@ func init ():
 func create():
 	
 	var btn:Button = Button.new()
-	btn.text = "tes"
-	btn.pressed.connect(func (): 
-		papers.EventHooks.trigger_singular("tess","tesaaa")
-		print(papers.EventHooks.return_values)
-		)
+	btn.text = "pause"
+	
 	add_child(btn)

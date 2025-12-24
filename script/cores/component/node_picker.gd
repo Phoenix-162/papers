@@ -2,24 +2,17 @@ extends Window
 
 var nodes:Dictionary = {
 	name = "root",
-	child = {
-		"q" = "res://script/nodes/node.gd",
-		"w" = {
-			name = "w",
-			child = {
-				"q" = "res://script/nodes/node.gd",
-			}
-		}
-	}
-}
+	child = {}}
+
+func _init() -> void:
+	pass
+
 
 @warning_ignore("unused_parameter")
 func start(graph:GraphEdit):
-	papers.EventHooks.create_singular("tess",func (tes:String): 
-		OS.alert(tes)
-		return tes
-		)
+	papers.EventHooks.trigger("tes")
 	pass
+	
 
 
 func pick(graph:GraphEdit)-> void:
