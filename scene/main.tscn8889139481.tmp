@@ -1,0 +1,115 @@
+[gd_scene load_steps=7 format=3 uid="uid://b0yx8sjv5hciy"]
+
+[ext_resource type="Script" uid="uid://b83j8ojs3plte" path="res://script/cores/main.gd" id="1_itxqv"]
+[ext_resource type="PackedScene" uid="uid://dv8bthwi7u61o" path="res://scene/gui/body.tscn" id="2_v0l8b"]
+[ext_resource type="Theme" uid="uid://ctbhvj40f22c2" path="res://ect/themes/popup.tres" id="2_wp4xf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vho56"]
+bg_color = Color(0.6, 0.17400002, 0.17400002, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wp4xf"]
+bg_color = Color(0.53, 0.53, 0.53, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_brvut"]
+bg_color = Color(0.6, 0.192, 0.192, 1)
+
+[node name="root" type="VBoxContainer"]
+custom_minimum_size = Vector2(200, 200)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+script = ExtResource("1_itxqv")
+
+[node name="menus" type="PanelContainer" parent="."]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vho56")
+
+[node name="MarginContainer" type="MarginContainer" parent="menus"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+
+[node name="wrapers" type="HBoxContainer" parent="menus/MarginContainer"]
+layout_mode = 2
+
+[node name="MenuButton" type="MenuButton" parent="menus/MarginContainer/wrapers"]
+layout_mode = 2
+theme = ExtResource("2_wp4xf")
+text = "files"
+item_count = 3
+popup/item_0/text = "save"
+popup/item_0/id = 0
+popup/item_1/text = "save as"
+popup/item_1/id = 1
+popup/item_2/text = "open"
+popup/item_2/id = 2
+
+[node name="MenuButton3" type="MenuButton" parent="menus/MarginContainer/wrapers"]
+layout_mode = 2
+theme = ExtResource("2_wp4xf")
+text = "veiw"
+item_count = 3
+popup/item_0/text = "viewport"
+popup/item_0/checkable = 1
+popup/item_0/id = 0
+popup/item_1/text = "editor"
+popup/item_1/checkable = 1
+popup/item_1/id = 1
+popup/item_2/text = "fullscreen mode"
+popup/item_2/checkable = 1
+popup/item_2/id = 2
+
+[node name="MenuButton2" type="MenuButton" parent="menus/MarginContainer/wrapers"]
+layout_mode = 2
+theme = ExtResource("2_wp4xf")
+theme_type_variation = &"FlatMenuButton"
+text = "plugins
+"
+
+[node name="HSplitContainer2" type="HSplitContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HSplitContainer" type="HSplitContainer" parent="HSplitContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 1
+
+[node name="left dock" type="PanelContainer" parent="HSplitContainer2/HSplitContainer"]
+visible = false
+layout_mode = 2
+
+[node name="body" parent="HSplitContainer2/HSplitContainer" instance=ExtResource("2_v0l8b")]
+custom_minimum_size = Vector2(600, 200)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="HSplitContainer2/HSplitContainer/body"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+mouse_filter = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Button" type="Button" parent="HSplitContainer2/HSplitContainer/body/MarginContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_styles/normal = SubResource("StyleBoxFlat_wp4xf")
+theme_override_styles/hover = SubResource("StyleBoxFlat_brvut")
+
+[node name="right dock" type="PanelContainer" parent="HSplitContainer2"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 0
+
+[connection signal="pressed" from="HSplitContainer2/HSplitContainer/body/MarginContainer/Button" to="." method="_on_button_pressed"]

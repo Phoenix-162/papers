@@ -3,7 +3,7 @@ extends Node
 
 class Storage :
 	static var node = Node.new()
-	static var data:Dictionary[StringName,Variant]
+	static var data:Array[Array]
 	static func _static_init() -> void:
 		node.name = "storage"
 
@@ -18,27 +18,50 @@ class DockingManager:
 		pass
 	pass
 
+
+
+
+
 class PluginLoader:
+	#static func loadPlugins(folder:String):
+		#pass
+	static func _static_init() -> void:
+		pass
+	
+	#static func loadDir(path:String):
+		#pass
 	static func loadzip(path:String):
-		#readd a zip file
+		#read from a zip file
+		
 		var reader = ZIPReader.new()
-		var folder = DirAccess.open(path)
+		var _folder = DirAccess.open(path)
 		if reader.open(path) != OK:
 			OS.alert("cant load plugin at" + "\"" + path + "\"" )
 			return
-		for file_path in reader.get_files():
-			if file_path.ends_with("/"):
-				# what hapend if path is a folder
-				continue
-			print(reader.read_file(file_path).get_string_from_utf8())
+		for file in reader.get_files():
+			if file.begins_with("/nodes"):
+				pass
+			if file == "header.gd":
+				var plugin = RefCounted.new()
+				var script = GDScript.new()
+				script.source_code = reader.read_file(file).get_string_from_utf8()
+				script.reload()
+				plugin.set_script(script)
+				OS.alert(script.source_code)
+				plugin.start()
+				# read the header.txt file as string tis will be a header
+				pass
 		reader.close()
 	pass
-
 
 class EventHooks:
 	static var hooks:Dictionary[StringName, Variant]
 	static var return_values:Dictionary[StringName,Variant]
-	static func create_grouped(name,events:Array[Callable],...args):
+	# create new event hook 
+	static func create(name,events:Array[Callable],...args):
+		if events.size() == 1:
+			hooks[name] = events[0].bindv(args)
+			return
 		var arr = []
 		for event:Callable in events:
 			arr.append(event.bindv(args))
@@ -47,14 +70,14 @@ class EventHooks:
 		else:
 			hooks[name].append_array(arr)
 		pass
-	static func create_singular(name:StringName,event:Callable,...args):
-		hooks[name] = event.bindv(args)
-		pass
+	#call the event hook with acritary number of pararameter
 	static func trigger(name:StringName,...args):
 		if not hooks.has(name):
 			return
+		#for triggering hooks that only a single function
 		if hooks[name] is Callable:
 			return_values[name] = hooks[name].callv(args)
+		#for triggering hooks that has mutiple function
 		if hooks[name] is Array:
 			var ret:Array
 			for event in hooks[name]:
@@ -69,8 +92,8 @@ class thmemeManager:
 	pass
 
 
-func _init() -> void:
-	PluginLoader.loadzip("C:/Users/ASUS/Documents/games project/papers/.godot/tes.zip")
+func _ready() -> void:
+	PluginLoader.loadzip("C:/Users/ASUS/Desktop/tes.zip")
 	add_child(Storage.node)
 	pass
 	

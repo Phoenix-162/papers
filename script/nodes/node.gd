@@ -9,8 +9,5 @@ func create():
 	
 	var btn:Button = Button.new()
 	btn.text = "pause"
-	btn.pressed.connect(func (): 
-		papers.EventHooks.trigger("tes")
-		pass
-		)
+	
 	add_child(btn)
