@@ -5,6 +5,7 @@ var nodes:Dictionary = {
 	child = {}}
 
 func _init() -> void:
+	
 	pass
 
 

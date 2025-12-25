@@ -47,8 +47,7 @@ class PluginLoader:
 				script.source_code = reader.read_file(file).get_string_from_utf8()
 				script.reload()
 				plugin.set_script(script)
-				OS.alert(script.source_code)
-				plugin.start()
+				plugin.init()
 				# read the header.txt file as string tis will be a header
 				pass
 		reader.close()

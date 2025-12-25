@@ -27,9 +27,13 @@ window/subwindows/embed_subwindows=false
 window/stretch/aspect="expand"
 window/stretch/scale_mode="integer"
 
+[dotnet]
+
+project/assembly_name="papers"
+
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/script-ide/plugin.cfg")
+enabled=PackedStringArray("res://addons/MonoBuildToggler/plugin.cfg", "res://addons/script-ide/plugin.cfg")
 
 [input]
 
