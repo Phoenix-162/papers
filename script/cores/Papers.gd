@@ -52,7 +52,6 @@ class PluginLoader:
 				pass
 		reader.close()
 	pass
-
 class EventHooks:
 	static var hooks:Dictionary[StringName, Variant]
 	static var return_values:Dictionary[StringName,Variant]
