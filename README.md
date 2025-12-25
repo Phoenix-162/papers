@@ -14,4 +14,4 @@ head over to my discord server if you want to hear about every little update or 
 
 ## Licence
 * Unless stated otherwise, this project is available under the MIT licence.
-  
+

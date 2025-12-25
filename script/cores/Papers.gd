@@ -47,13 +47,27 @@ class PluginLoader:
 				script.source_code = reader.read_file(file).get_string_from_utf8()
 				script.reload()
 				plugin.set_script(script)
+				await plugin.init()
+				var tmp = {}
+				if plugin is PluginHead:
+					tmp.name = plugin.name
+					tmp.description = plugin.description
+					tmp.plugin = plugin
+					Storage.data["Plugins"][tmp.name] = tmp
+					pass
+				else :
+					tmp.name = hash(plugin)
+					tmp.description = ""
+					tmp.plugin = plugin
+					Storage.data["Plugins"][tmp.name] = hash(plugin)
+					pass
+				
 				OS.alert(script.source_code)
 				plugin.start()
 				# read the header.txt file as string tis will be a header
 				pass
 		reader.close()
 	pass
-
 class EventHooks:
 	static var hooks:Dictionary[StringName, Variant]
 	static var return_values:Dictionary[StringName,Variant]
@@ -90,6 +104,10 @@ class EventHooks:
 
 class thmemeManager:
 	pass
+func _ready() -> void:
+	Storage.data["Plugins"] =  {}
+	PluginLoader.loadzip("C:/Users/ASUS/Desktop/tes.zip")
+	print(Storage.data)
 
 
 func _ready() -> void:
