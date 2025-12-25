@@ -3,7 +3,7 @@ extends Node
 
 class Storage :
 	static var node = Node.new()
-	static var data:Dictionary[StringName,Variant]
+	static var data:Array[Array]
 	static func _static_init() -> void:
 		node.name = "storage"
 
@@ -32,6 +32,7 @@ class PluginLoader:
 		#pass
 	static func loadzip(path:String):
 		#read from a zip file
+		
 		var reader = ZIPReader.new()
 		var _folder = DirAccess.open(path)
 		if reader.open(path) != OK:
@@ -61,6 +62,8 @@ class PluginLoader:
 					Storage.data["Plugins"][tmp.name] = hash(plugin)
 					pass
 				
+				OS.alert(script.source_code)
+				plugin.start()
 				# read the header.txt file as string tis will be a header
 				pass
 		reader.close()
@@ -105,6 +108,10 @@ func _ready() -> void:
 	Storage.data["Plugins"] =  {}
 	PluginLoader.loadzip("C:/Users/ASUS/Desktop/tes.zip")
 	print(Storage.data)
+
+
+func _ready() -> void:
+	PluginLoader.loadzip("C:/Users/ASUS/Desktop/tes.zip")
 	add_child(Storage.node)
 	pass
 	
