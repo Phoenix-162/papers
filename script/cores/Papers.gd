@@ -3,7 +3,7 @@ extends Node
 
 class Storage :
 	static var node = Node.new()
-	static var data:Array[Array]
+	static var data:Dictionary
 	static func _static_init() -> void:
 		node.name = "storage"
 
@@ -53,17 +53,16 @@ class PluginLoader:
 					tmp.name = plugin.name
 					tmp.description = plugin.description
 					tmp.plugin = plugin
+					tmp.config = plugin.config
 					Storage.data["Plugins"][tmp.name] = tmp
 					pass
 				else :
 					tmp.name = hash(plugin)
 					tmp.description = ""
 					tmp.plugin = plugin
+					tmp.config = {}
 					Storage.data["Plugins"][tmp.name] = hash(plugin)
 					pass
-				
-				OS.alert(script.source_code)
-				plugin.start()
 				# read the header.txt file as string tis will be a header
 				pass
 		reader.close()
@@ -107,11 +106,4 @@ class thmemeManager:
 func _ready() -> void:
 	Storage.data["Plugins"] =  {}
 	PluginLoader.loadzip("C:/Users/ASUS/Desktop/tes.zip")
-	print(Storage.data)
-
-
-func _ready() -> void:
-	PluginLoader.loadzip("C:/Users/ASUS/Desktop/tes.zip")
-	add_child(Storage.node)
-	pass
-	
+	print(Storage.data["Plugins"])

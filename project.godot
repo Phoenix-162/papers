@@ -12,7 +12,7 @@ config_version=5
 
 config/name="papers"
 run/main_scene="uid://b0yx8sjv5hciy"
-config/features=PackedStringArray("4.5", "Forward Plus")
+config/features=PackedStringArray("4.5", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
@@ -34,9 +34,6 @@ project/assembly_name="papers"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/MonoBuildToggler/plugin.cfg", "res://addons/script-ide/plugin.cfg")
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/script-ide/plugin.cfg")
 
 [input]
 
