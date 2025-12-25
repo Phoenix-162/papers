@@ -34,6 +34,9 @@ project/assembly_name="papers"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/MonoBuildToggler/plugin.cfg", "res://addons/script-ide/plugin.cfg")
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/script-ide/plugin.cfg")
 
 [input]
 
