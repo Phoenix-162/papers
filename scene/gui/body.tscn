@@ -89,6 +89,7 @@ metadata/_tab_index = 1
 
 [node name="GraphEdit" type="GraphEdit" parent="TabContainer/edittor"]
 layout_mode = 2
+scroll_offset = Vector2(0, -55)
 minimap_enabled = false
 show_minimap_button = false
 script = ExtResource("3_nkjlt")

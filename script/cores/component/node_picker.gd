@@ -1,11 +1,12 @@
 extends Window
 
-var nodes:Dictionary = {
-	name = "root",
-	child = {}}
+var nodes:Dictionary = {}
+
+
 
 func _init() -> void:
-	
+	await papers.plugin_loaded
+	nodes = papers.Storage.data["nodes"]
 	pass
 
 
