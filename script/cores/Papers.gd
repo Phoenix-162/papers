@@ -1,12 +1,11 @@
 extends Node
 
-
+signal plugin_loaded #emited when all plugin are loaded
 class Storage :
 	static var node = Node.new()
 	static var data:Array[Array]
 	static func _static_init() -> void:
 		node.name = "storage"
-
 class DockingManager:
 	enum DockingPosition{
 		Bottom,
@@ -17,11 +16,6 @@ class DockingManager:
 	static func create():
 		pass
 	pass
-
-
-
-
-
 class PluginLoader:
 	#static func loadPlugins(folder:String):
 		#pass
@@ -34,19 +28,19 @@ class PluginLoader:
 		#read from a zip file
 		
 		var reader = ZIPReader.new()
-		var _folder = DirAccess.open(path)
+		#var folder = DirAccess.open(path)
 		if reader.open(path) != OK:
 			OS.alert("cant load plugin at" + "\"" + path + "\"" )
 			return
+		print(reader.get_files())
 		for file in reader.get_files():
-			if file.begins_with("/nodes"):
-				pass
 			if file == "header.gd":
-				var plugin = RefCounted.new()
+				var plugin = Resource.new()
 				var script = GDScript.new()
 				script.source_code = reader.read_file(file).get_string_from_utf8()
 				script.reload()
 				plugin.set_script(script)
+				plugin.plugin_path = path
 				await plugin.init()
 				var tmp = {}
 				if plugin is PluginHead:
@@ -101,10 +95,12 @@ class EventHooks:
 			pass
 		pass
 	pass
-
 class thmemeManager:
 	pass
+
 func _ready() -> void:
+	var reader = FileAccess.open("C:/Users/ASUS/Desktop/list.txt",FileAccess.READ)
+	Storage.data["nodes"] = {name = "root",child = {}}
 	Storage.data["Plugins"] =  {}
 	PluginLoader.loadzip("C:/Users/ASUS/Desktop/tes.zip")
 	print(Storage.data)

@@ -14,8 +14,6 @@ func _init() -> void:
 
 
 
-
-
 func display(nodes:Dictionary):
 	for id in nodes.child.keys():
 		var node = nodes.child[id]
@@ -28,7 +26,10 @@ func display(nodes:Dictionary):
 			pass
 		else:
 			var node_meta = GraphNode.new()
-			node_meta.set_script(load(node))
+			var script = GDScript.new()
+			script.source_code = node.get_string_from_utf8()
+			script.reload()
+			node_meta.set_script(script)
 			node_meta.name = "node"
 			new_card.add_child(node_meta)
 			node_meta.visible = false
@@ -43,6 +44,7 @@ func pressed(card_self:Control):
 	var arr:Array = []
 	var node = card_self.get_node_or_null("node")
 	if not node == null:
+		$"../../PanelContainer/scroll2/RichTextLabel".text = card_self.get_node("node").descripton
 		emit_signal("selected",card_self)
 		pass 
 	else:
